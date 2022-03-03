@@ -31,21 +31,21 @@ export class HomeComponent implements OnInit {
         ).subscribe(res => { });
     }
 
-    markAsComplete(id: string) {
+    markAsComplete(id: string): void {
         this.todoService.updateTodo(id, { status: TodoStatus.DONE }).subscribe({
             next: (res) => this.toastr.success("Todo completed."),
             error: (err) => console.log(err)
         });
     }
 
-    deleteTodo(id: string) {
+    deleteTodo(id: string): void {
         this.todoService.deleteTodo(id).subscribe({
             next: res => this.toastr.success("Todo deleted."),
             error: (err) => console.log(err)
         })
     }
 
-    todoTrackBy(index: number, todo: Todo) {
+    todoTrackBy(index: number, todo: Todo): string {
         return todo._id;
     }
 
