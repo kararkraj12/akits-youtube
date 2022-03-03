@@ -1,0 +1,30 @@
+[
+    {
+        "status": "open",
+        "_id": "621f03bfa1ceed001716071a",
+        "title": "First todo",
+        "description": "This is my first todo.",
+        "__v": 0
+    },
+    {
+        "status": "open",
+        "_id": "621f06dea1ceed001716071b",
+        "title": "Fifth Todo",
+        "description": "This is my fifth todo.",
+        "__v": 0
+    },
+    {
+        "status": "open",
+        "_id": "621f0b40a1ceed001716071c",
+        "title": "Second Todo",
+        "description": "This is my second todo",
+        "__v": 0
+    },
+    {
+        "status": "open",
+        "_id": "621f0ec9a1ceed001716071d",
+        "title": "First todo",
+        "description": "This is my first todo.",
+        "__v": 0
+    }
+]

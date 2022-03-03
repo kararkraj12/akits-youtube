@@ -1,0 +1,16 @@
+<div class="container">
+    <h2>Add Todo</h2>
+    <mat-card>
+        <form #todoForm="ngForm" [formGroup]="form" (ngSubmit)="form.valid && addTodo(todoForm)">
+            <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Title</mat-label>
+                <input formControlName="title" matInput placeholder="Title" />
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Description</mat-label>
+                <input formControlName="description" matInput placeholder="Description" />
+            </mat-form-field>
+            <button type="submit" mat-raised-button color="primary">Add Todo</button>
+        </form>
+    </mat-card>
+</div>

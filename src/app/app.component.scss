@@ -1,0 +1,9 @@
+.example-spacer {
+    flex: 1 1 auto;
+}
+div.outer {
+    display: flex;
+    .inner {
+        width: 50%;
+    }
+}
