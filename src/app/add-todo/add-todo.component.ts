@@ -25,7 +25,7 @@ export class AddTodoComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    addTodo(form: FormGroupDirective) {
+    addTodo(form: FormGroupDirective): void {
         this.todoService.addTodo(this.form.controls['title'].value, this.form.controls['description'].value).subscribe({
             next: res => {
                 this.toastr.success("Todo successfully added.");
