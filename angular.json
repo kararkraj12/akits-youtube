@@ -69,6 +69,20 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
+            },
+            "static": {
+                "buildOptimizer": false,
+                "optimization": false,
+                "vendorChunk": true,
+                "extractLicenses": false,
+                "sourceMap": true,
+                "namedChunks": true,
+                "fileReplacements": [
+                    {
+                    "replace": "src/environments/environment.ts",
+                    "with": "src/environments/environment.static.ts"
+                    }
+                ]
             }
           },
           "defaultConfiguration": "production"
@@ -81,6 +95,9 @@
             },
             "development": {
               "browserTarget": "akita-youtube:build:development"
+            },
+            "static": {
+                "browserTarget": "akita-youtube:build:static"
             }
           },
           "defaultConfiguration": "development"

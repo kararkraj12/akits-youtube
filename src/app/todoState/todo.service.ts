@@ -60,7 +60,7 @@ export class TodoService {
         );
     }
 
-    updateTodo(id: string, changes: any): Observable<Todo> {
+    updateTodo(id: string, changes: Partial<Todo>): Observable<Todo> {
         return this.http.put<Todo>(`${environment.baseUrl}/${id}`, changes).pipe(
             tap(res => {
                 this.todoStore.update(state => {
