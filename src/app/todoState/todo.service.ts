@@ -48,6 +48,7 @@ export class TodoService {
     }
 
     deleteTodo(id: string): Observable<Todo> {
+        this.todoStore.setLoading(true);
         return this.http.delete<Todo>(`${environment.baseUrl}/${id}`).pipe(
             tap(res => {
                 this.todoStore.update(state => {
@@ -56,11 +57,13 @@ export class TodoService {
                         todos: state.todos.filter(t => t._id !== id)
                     }
                 });
+                this.todoStore.setLoading(false);
             })
         );
     }
 
     updateTodo(id: string, changes: Partial<Todo>): Observable<Todo> {
+        this.todoStore.setLoading(true);
         return this.http.put<Todo>(`${environment.baseUrl}/${id}`, changes).pipe(
             tap(res => {
                 this.todoStore.update(state => {
@@ -74,7 +77,8 @@ export class TodoService {
                         ...state,
                         todos
                     };
-                })
+                });
+                this.todoStore.setLoading(false);
             })
         );
     }

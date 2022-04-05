@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { switchMap } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subject, switchMap, takeUntil } from 'rxjs';
 import { Todo, TodoStatus } from '../todoState/todo.model';
 import { TodoQuery } from '../todoState/todo.query';
 import { TodoService } from '../todoState/todo.service';
@@ -10,10 +10,11 @@ import { ToastrService } from 'ngx-toastr';
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 
     loading: boolean = false;
     todos: Todo[] = [];
+    takeUntilSubject: Subject<boolean> = new Subject<boolean>();
 
     constructor(
         private todoQuery: TodoQuery,
@@ -22,13 +23,8 @@ export class HomeComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.todoQuery.getLoading().subscribe(res => this.loading = res);
-        this.todoQuery.getTodos().subscribe(res => this.todos = res);
-        this.todoQuery.getLoaded().pipe(
-            switchMap(() => {
-                return this.todoService.getTodos();
-            })
-        ).subscribe(res => { });
+        this.todoQuery.getLoading().pipe(takeUntil(this.takeUntilSubject)).subscribe(res => this.loading = res);
+        this.todoQuery.getTodos().pipe(takeUntil(this.takeUntilSubject)).subscribe(res => this.todos = res);
     }
 
     markAsComplete(id: string): void {
@@ -47,6 +43,11 @@ export class HomeComponent implements OnInit {
 
     todoTrackBy(index: number, todo: Todo): string {
         return todo._id;
+    }
+
+    ngOnDestroy() {
+        this.takeUntilSubject.next(true);
+        this.takeUntilSubject.complete();
     }
 
 }
